@@ -208,6 +208,13 @@ done({ status: response.status, headers: response.headers, body: response.body.r
 
 `bodyBytes` 与 `binary_body_mode` 可用于 protobuf、图片等二进制正文；`full_header_mode` 使用 `{field, value}` 数组保留重复 Header。脚本中的 `$httpClient` 会沿用 sing-box 的 HTTP 出站和路由，并支持异步回调、Promise、定时器、持久化存储和 `setTimeout`。`$httpAPI` 仅返回明确的“不支持”结果，不会伪装成 Surge 控制接口。
 
+iOS 上脚本有两套执行引擎，行为一致，按需自动选择：
+
+- **WebKit 引擎**：脚本在隐藏的 WKWebView 里执行，JavaScript 运行在系统单独的 WebContent 进程，不计入 Network Extension 的 50 MB 内存。扩展里只保留 body 在进程间传递时的副本，约为 body 的 1.5–4.5 倍（goja 约为 20 倍）。每个同时运行的脚本各有独立的全局环境。
+- **goja 引擎**：在扩展进程内执行。body 和脚本源码都小于 128 KiB 时优先用它，这样只用到小脚本的配置不会加载 WebKit；WebKit 首次成功运行后，之后的脚本全部改走 WebKit。WebKit 不可用时也会退回 goja。
+
+两套引擎在执行前都会检查剩余内存，不够时跳过该脚本并原样放行，日志为 `script skipped: insufficient memory headroom`。iOS 上单个缓存 body 最大 2 MiB，`max_size` 设得更大（或为 `-1`）时也按 2 MiB 处理；`$httpClient` 响应和 `$utils.ungzip` 输出最大 2 MiB。
+
 远程脚本首次下载失败（例如源站返回 403）时会 fail-open：记录错误并暂时禁用该脚本，但不会阻止 VPN 和其他脚本启动。已有缓存会优先使用；下载请求会携带脚本加载器 User-Agent 与 JavaScript Accept Header。
 
 ## 9. 常见限制
@@ -216,7 +223,8 @@ done({ status: response.status, headers: response.headers, body: response.body.r
 - HTTP/3/QUIC 使用 UDP，不经过当前 TLS-over-TCP MITM；命中 MITM 的 TCP/443 域名会自动拒绝 QUIC，促使客户端回退到 HTTP/2 或 HTTP/1.1。
 - 只给必要域名启用 MITM。`print` 会把敏感 Header 和正文写入日志，完成调试后应关闭。
 - HTTP/2 每个 stream 使用独立目标和 TLS 状态；多个模块命中同一域名时，MITM 规则会合并，而不是后一个模块覆盖前一个模块。
-- 为控制内存（Network Extension 上限约 50 MB)，所有 body 缓存（含 gzip/brotli 解码后的副本）共享 6 MiB 全局预算。高并发下预算耗尽时，该请求跳过 body 重写和 `requires_body` 脚本、按原始内容透传，日志会出现 `body buffer budget exhausted` WARN;header 重写、URL 重写等不依赖 body 的功能不受影响。
+- 为控制内存（Network Extension 上限约 50 MB），iOS 上所有缓存的 body（线上原文、gzip/brotli 解码后的副本、改写产生的副本）共享 6 MiB 全局预算，按实际占用记账。预算或剩余内存不够时，该请求跳过 body 重写和 `requires_body` 脚本，按原始内容透传，日志出现 `body buffer budget exhausted` WARN；header 重写、URL 重写等不依赖 body 的功能不受影响。
+- 内存紧张时 MITM 会主动降级而不是让扩展被系统杀掉：新连接不再解密、直接透传（日志 `MITM skipped (memory pressure), passing through`），并关闭空闲的 MITM 连接和上游连接。同一出站、同一 SNI 的请求复用上游连接，HTTP/2 每个流最多缓冲 256 KiB。
 - 本地和远程 Profile 会完整备份到 `文件 App -> 我的 iPhone -> sing-box -> Profiles`，并在运行目录中的 `configs/config_N.json` 缺失时自动恢复。备份包含 MITM CA 私钥和 P12 密码，必须按敏感文件保管。正常覆盖更新会保留该目录；卸载 App 仍可能由 iOS 删除它，卸载前应再复制到 Downloads 或其他文件夹。
 - 删除根 CA：`设置 -> 通用 -> VPN 与设备管理` 删除描述文件，并在证书信任设置中确认已移除。
 

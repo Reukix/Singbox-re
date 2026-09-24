@@ -671,6 +671,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				PacketTunnelProvider.swift,
+				WebScriptEngine.swift,
 			);
 			target = 3A096F852A4ED3DE00D4A2ED /* Extension */;
 		};
