@@ -2,6 +2,9 @@
 
 Experimental iOS/macOS/tvOS client for sing-box, the universal proxy platform.
 
+
+针对singbox没有mitm的补全 炸内存
+
 ## Documentation
 
 [SFI](https://sing-box.sagernet.org/installation/clients/sfi/) | [SFM](https://sing-box.sagernet.org/installation/clients/sfm/)
