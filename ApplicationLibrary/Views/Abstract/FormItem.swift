@@ -58,6 +58,14 @@ public func FormTextItem(_ name: LocalizedStringKey, _ systemImage: String, @Vie
     #endif
 }
 
+public func FormProgressView() -> some View {
+    // ProgressView reports Double.leastNormalMagnitude as its first text baseline on iOS,
+    // dragging the baseline of the enclosing stack to the top of the item.
+    ProgressView()
+        .controlSize(.small)
+        .alignmentGuide(.firstTextBaseline) { $0[.bottom] }
+}
+
 public func FormItem(_ title: String, @ViewBuilder content: () -> some View) -> some View {
     #if os(iOS)
         HStack {
@@ -148,6 +156,14 @@ public func FormButton(_ titleKey: some StringProtocol, action: @escaping () -> 
 
 public func FormButton(role: ButtonRole?, action: @escaping () -> Void, @ViewBuilder label: () -> some View) -> some View {
     Button(role: role, action: action, label: label)
+    #if os(macOS)
+        .buttonStyle(.plain)
+        .foregroundColor(.accentColor)
+    #endif
+}
+
+public func FormLink(destination: URL, @ViewBuilder label: () -> some View) -> some View {
+    Link(destination: destination, label: label)
     #if os(macOS)
         .buttonStyle(.plain)
         .foregroundColor(.accentColor)

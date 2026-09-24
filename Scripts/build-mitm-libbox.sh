@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build Libbox.xcframework from sing-box v1.15.0-alpha.6 + the MITM port.
+# Build Libbox.xcframework from sing-box v1.15.0-alpha.7 + the MITM port.
 #
 # The MITM implementation starts from the upstream dev-mitm-2 branch
 # and includes the local HTTP pipeline, body codec, Script Hub and Apple UI
@@ -13,7 +13,7 @@ set -euo pipefail
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 core_dir="$project_root/Core/sing-box"
 patch_file="$project_root/Patches/mitm-1.15.patch"
-base_version="v1.15.0-alpha.6"
+base_version="v1.15.0-alpha.7"
 framework_source="$core_dir/Libbox.xcframework"
 framework_target="$project_root/Libbox.xcframework"
 

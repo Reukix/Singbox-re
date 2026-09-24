@@ -1,5 +1,5 @@
 diff --git a/.gitignore b/.gitignore
-index d2b74d0..214bc16 100644
+index d2b74d08c..214bc1600 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -1,6 +1,7 @@
@@ -11,7 +11,7 @@ index d2b74d0..214bc16 100644
  /*.db
  /site/
 diff --git a/.golangci.yml b/.golangci.yml
-index 10f422e..9e82661 100644
+index 10f422eb6..9e826611e 100644
 --- a/.golangci.yml
 +++ b/.golangci.yml
 @@ -8,6 +8,7 @@ run:
@@ -23,7 +23,7 @@ index 10f422e..9e82661 100644
      - with_ccm
      - with_ocm
 diff --git a/adapter/certificate.go b/adapter/certificate.go
-index dfed642..9532e86 100644
+index dfed642df..9532e86e7 100644
 --- a/adapter/certificate.go
 +++ b/adapter/certificate.go
 @@ -11,6 +11,9 @@ type CertificateStore interface {
@@ -37,7 +37,7 @@ index dfed642..9532e86 100644
  
  func RootPoolFromContext(ctx context.Context) *x509.CertPool {
 diff --git a/adapter/experimental.go b/adapter/experimental.go
-index 8e93cff..208213c 100644
+index 134053fcb..07a4d8c74 100644
 --- a/adapter/experimental.go
 +++ b/adapter/experimental.go
 @@ -47,6 +47,10 @@ type CacheFile interface {
@@ -52,7 +52,7 @@ index 8e93cff..208213c 100644
  
  type SavedBinary struct {
 diff --git a/adapter/inbound.go b/adapter/inbound.go
-index 954ec9c..a19eaf9 100644
+index 4bfbb2ef9..fdb8e5559 100644
 --- a/adapter/inbound.go
 +++ b/adapter/inbound.go
 @@ -2,7 +2,9 @@ package adapter
@@ -65,7 +65,7 @@ index 954ec9c..a19eaf9 100644
  	"net/netip"
  	"time"
  
-@@ -61,12 +63,15 @@ type InboundContext struct {
+@@ -62,12 +64,15 @@ type InboundContext struct {
  
  	// sniffer
  
@@ -87,7 +87,7 @@ index 954ec9c..a19eaf9 100644
  
  	// cache
  
-@@ -83,6 +88,7 @@ type InboundContext struct {
+@@ -84,6 +89,7 @@ type InboundContext struct {
  	TLSRecordFragment         bool
  	TLSSpoof                  string
  	TLSSpoofMethod            tlsspoof.Method
@@ -96,7 +96,7 @@ index 954ec9c..a19eaf9 100644
  	NetworkStrategy     *C.NetworkStrategy
  	NetworkType         []C.InterfaceType
 diff --git a/adapter/lifecycle.go b/adapter/lifecycle.go
-index 8fd8830..f2d30af 100644
+index 8fd8830b2..f2d30afb5 100644
 --- a/adapter/lifecycle.go
 +++ b/adapter/lifecycle.go
 @@ -77,6 +77,9 @@ func getServiceName(service any) string {
@@ -111,7 +111,7 @@ index 8fd8830..f2d30af 100644
  			return err
 diff --git a/adapter/mitm.go b/adapter/mitm.go
 new file mode 100644
-index 0000000..450468a
+index 000000000..450468a97
 --- /dev/null
 +++ b/adapter/mitm.go
 @@ -0,0 +1,13 @@
@@ -129,7 +129,7 @@ index 0000000..450468a
 +	NewConnection(ctx context.Context, this N.Dialer, conn net.Conn, metadata InboundContext, onClose N.CloseHandlerFunc)
 +}
 diff --git a/adapter/platform.go b/adapter/platform.go
-index 4ec165d..8179ec2 100644
+index 4ec165d39..8179ec2a4 100644
 --- a/adapter/platform.go
 +++ b/adapter/platform.go
 @@ -127,6 +127,11 @@ type Notification struct {
@@ -146,7 +146,7 @@ index 4ec165d..8179ec2 100644
  type SystemProxyStatus struct {
 diff --git a/adapter/script.go b/adapter/script.go
 new file mode 100644
-index 0000000..76f0adb
+index 000000000..76f0adb6b
 --- /dev/null
 +++ b/adapter/script.go
 @@ -0,0 +1,56 @@
@@ -207,7 +207,7 @@ index 0000000..76f0adb
 +	Abort   bool
 +}
 diff --git a/box.go b/box.go
-index 91964c7..400b60b 100644
+index ddd1de4d5..fbf4de924 100644
 --- a/box.go
 +++ b/box.go
 @@ -30,9 +30,11 @@ import (
@@ -353,22 +353,8 @@ index 91964c7..400b60b 100644
  		done := adapter.LogElapsed(s.logger, "close ", closeItem.name)
  		err = E.Append(err, closeItem.service.Close(), func(err error) error {
  			return E.Cause(err, "close ", closeItem.name)
-diff --git a/clients/android b/clients/android
-index a3668ae..aefe3c0 160000
---- a/clients/android
-+++ b/clients/android
-@@ -1 +1 @@
--Subproject commit a3668ae6e4bbcb3ceff8461d0cac55d79edf504f
-+Subproject commit aefe3c029096ddac5189a20a8203a68858152f0a
-diff --git a/clients/apple b/clients/apple
-index 2b1763a..ae5818e 160000
---- a/clients/apple
-+++ b/clients/apple
-@@ -1 +1 @@
--Subproject commit 2b1763a80f2c1dee1ab3ac62d84dbda7dc5178f4
-+Subproject commit ae5818ee5a24af965dc91f80bffa16e1e6c109c1
 diff --git a/cmd/internal/build_libbox/main.go b/cmd/internal/build_libbox/main.go
-index 626d221..fbe4279 100644
+index 626d221b8..fbe42793a 100644
 --- a/cmd/internal/build_libbox/main.go
 +++ b/cmd/internal/build_libbox/main.go
 @@ -63,7 +63,7 @@ func init() {
@@ -382,7 +368,7 @@ index 626d221..fbe4279 100644
  	sharedTags = append(sharedTags, "with_tailscale", "ts_omit_logtail", "ts_omit_ssh", "ts_omit_drive", "ts_omit_taildrop", "ts_omit_webclient", "ts_omit_doctor", "ts_omit_capture", "ts_omit_kube", "ts_omit_aws", "ts_omit_synology", "ts_omit_bird")
 diff --git a/cmd/sing-box/cmd_generate_ca.go b/cmd/sing-box/cmd_generate_ca.go
 new file mode 100644
-index 0000000..11bd6ce
+index 000000000..11bd6ceb4
 --- /dev/null
 +++ b/cmd/sing-box/cmd_generate_ca.go
 @@ -0,0 +1,121 @@
@@ -509,7 +495,7 @@ index 0000000..11bd6ce
 +}
 diff --git a/cmd/sing-box/cmd_tools_install_ca.go b/cmd/sing-box/cmd_tools_install_ca.go
 new file mode 100644
-index 0000000..80ec14b
+index 000000000..80ec14b10
 --- /dev/null
 +++ b/cmd/sing-box/cmd_tools_install_ca.go
 @@ -0,0 +1,108 @@
@@ -622,7 +608,7 @@ index 0000000..80ec14b
 +	}
 +}
 diff --git a/cmd/sing-box/cmd_tools_synctime.go b/cmd/sing-box/cmd_tools_synctime.go
-index 09d487e..33e3874 100644
+index 09d487ef9..33e387431 100644
 --- a/cmd/sing-box/cmd_tools_synctime.go
 +++ b/cmd/sing-box/cmd_tools_synctime.go
 @@ -8,6 +8,7 @@ import (
@@ -656,7 +642,7 @@ index 09d487e..33e3874 100644
  		return err
  	}
 diff --git a/common/certificate/store.go b/common/certificate/store.go
-index 34871a6..ff7a680 100644
+index 34871a6b2..ff7a680a8 100644
 --- a/common/certificate/store.go
 +++ b/common/certificate/store.go
 @@ -4,6 +4,7 @@ import (
@@ -724,10 +710,10 @@ index 34871a6..ff7a680 100644
 +	return s.tlsDecryptionPrivateKey
 +}
 diff --git a/common/httpclient/apple_transport_darwin_test.go b/common/httpclient/apple_transport_darwin_test.go
-index 272e8f1..bba4410 100644
+index 7284fb95c..4aba02509 100644
 --- a/common/httpclient/apple_transport_darwin_test.go
 +++ b/common/httpclient/apple_transport_darwin_test.go
-@@ -810,9 +810,10 @@ func newAppleHTTPTestTransport(t *testing.T, server *appleHTTPTestServer, option
+@@ -861,9 +861,10 @@ func newAppleHTTPTestTransport(t *testing.T, server *appleHTTPTestServer, option
  }
  
  func newAppleHTTPTestContext() context.Context {
@@ -741,18 +727,18 @@ index 272e8f1..bba4410 100644
  }
  
 diff --git a/common/sniff/http.go b/common/sniff/http.go
-index 012f2c9..31026d8 100644
+index 1bccfa1db..ba476804b 100644
 --- a/common/sniff/http.go
 +++ b/common/sniff/http.go
 @@ -24,5 +24,6 @@ func HTTPHost(_ context.Context, metadata *adapter.InboundContext, reader io.Rea
  	}
  	metadata.Protocol = C.ProtocolHTTP
- 	metadata.Domain = M.ParseSocksaddr(request.Host).AddrString()
+ 	metadata.Domain = M.ParseSocksaddr(request.Host).Fqdn
 +	metadata.HTTPRequest = request
  	return nil
  }
 diff --git a/common/sniff/tls.go b/common/sniff/tls.go
-index 613086e..1dced76 100644
+index 613086e81..1dced76cb 100644
 --- a/common/sniff/tls.go
 +++ b/common/sniff/tls.go
 @@ -23,6 +23,7 @@ func TLSClientHello(ctx context.Context, metadata *adapter.InboundContext, reade
@@ -764,7 +750,7 @@ index 613086e..1dced76 100644
  	}
  	if errors.Is(err, io.ErrUnexpectedEOF) {
 diff --git a/common/tls/mkcert.go b/common/tls/mkcert.go
-index 4e0ed10..fc9c4ab 100644
+index 4e0ed102b..fc9c4ab92 100644
 --- a/common/tls/mkcert.go
 +++ b/common/tls/mkcert.go
 @@ -8,7 +8,10 @@ import (
@@ -822,7 +808,7 @@ index 4e0ed10..fc9c4ab 100644
  		parent = template
 diff --git a/constant/script.go b/constant/script.go
 new file mode 100644
-index 0000000..4557403
+index 000000000..45574038f
 --- /dev/null
 +++ b/constant/script.go
 @@ -0,0 +1,7 @@
@@ -834,7 +820,7 @@ index 0000000..4557403
 +	ScriptSourceTypeRemote = "remote"
 +)
 diff --git a/experimental/cachefile/cache.go b/experimental/cachefile/cache.go
-index d640cbc..8c1cc6c 100644
+index d640cbc47..8c1cc6c2d 100644
 --- a/experimental/cachefile/cache.go
 +++ b/experimental/cachefile/cache.go
 @@ -20,10 +20,12 @@ import (
@@ -927,7 +913,7 @@ index d640cbc..8c1cc6c 100644
 +}
 diff --git a/experimental/clashapi/mitm.go b/experimental/clashapi/mitm.go
 new file mode 100644
-index 0000000..8d64081
+index 000000000..8d64081df
 --- /dev/null
 +++ b/experimental/clashapi/mitm.go
 @@ -0,0 +1,186 @@
@@ -1118,7 +1104,7 @@ index 0000000..8d64081
 +	return nil
 +}
 diff --git a/experimental/clashapi/server.go b/experimental/clashapi/server.go
-index b9222ad..d5f8fa8 100644
+index b9222ad54..d5f8fa817 100644
 --- a/experimental/clashapi/server.go
 +++ b/experimental/clashapi/server.go
 @@ -126,6 +126,7 @@ func NewServer(ctx context.Context, logFactory log.ObservableFactory, options op
@@ -1131,7 +1117,7 @@ index b9222ad..d5f8fa8 100644
  	})
 diff --git a/experimental/libbox/mitm_certificate.go b/experimental/libbox/mitm_certificate.go
 new file mode 100644
-index 0000000..163bccb
+index 000000000..163bccb6b
 --- /dev/null
 +++ b/experimental/libbox/mitm_certificate.go
 @@ -0,0 +1,81 @@
@@ -1218,7 +1204,7 @@ index 0000000..163bccb
 +}
 diff --git a/experimental/libbox/mitm_certificate_test.go b/experimental/libbox/mitm_certificate_test.go
 new file mode 100644
-index 0000000..b7c665d
+index 000000000..b7c665d5e
 --- /dev/null
 +++ b/experimental/libbox/mitm_certificate_test.go
 @@ -0,0 +1,27 @@
@@ -1250,7 +1236,7 @@ index 0000000..b7c665d
 +	}
 +}
 diff --git a/experimental/libbox/platform.go b/experimental/libbox/platform.go
-index 19759b3..7fa84b7 100644
+index 19759b3c6..7fa84b7a5 100644
 --- a/experimental/libbox/platform.go
 +++ b/experimental/libbox/platform.go
 @@ -157,6 +157,11 @@ type Notification struct {
@@ -1265,20 +1251,8 @@ index 19759b3..7fa84b7 100644
  }
  
  type OnDemandRule interface {
-diff --git a/experimental/libbox/power_report.go b/experimental/libbox/power_report.go
-index 2d90c62..df2c05a 100644
---- a/experimental/libbox/power_report.go
-+++ b/experimental/libbox/power_report.go
-@@ -40,3 +40,7 @@ func PowerReportOptions(startedService *daemon.StartedService) powerreport.Optio
- func DiscardPowerReportDraft() {
- 	powerreport.DiscardDraft(sWorkingPath)
- }
-+
-+func PromotePowerReportDraft() {
-+	powerreport.PromoteDraft(sWorkingPath)
-+}
 diff --git a/go.mod b/go.mod
-index 3926113..92d98ca 100644
+index 3299c5cfa..8172adbeb 100644
 --- a/go.mod
 +++ b/go.mod
 @@ -4,6 +4,8 @@ go 1.25.5
@@ -1356,7 +1330,7 @@ index 3926113..92d98ca 100644
  	github.com/klauspost/compress v1.19.1 // indirect
  	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 diff --git a/go.sum b/go.sum
-index bed2c0a..d710b84 100644
+index bd902cfd9..6d42106e0 100644
 --- a/go.sum
 +++ b/go.sum
 @@ -10,10 +10,14 @@ filippo.io/edwards25519 v1.2.0/go.mod h1:xzAOLCNug/yB62zG1bQ8uziwrIqIuxhctzJT18Q
@@ -1441,7 +1415,7 @@ index bed2c0a..d710b84 100644
  gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
  gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 diff --git a/log/log.go b/log/log.go
-index 3a1c653..c735a80 100644
+index 3a1c6537a..c735a8089 100644
 --- a/log/log.go
 +++ b/log/log.go
 @@ -10,6 +10,10 @@ import (
@@ -1466,7 +1440,7 @@ index 3a1c653..c735a80 100644
  		options.Context,
 diff --git a/mitm/body.go b/mitm/body.go
 new file mode 100644
-index 0000000..d6b23b0
+index 000000000..d6b23b0eb
 --- /dev/null
 +++ b/mitm/body.go
 @@ -0,0 +1,317 @@
@@ -1789,7 +1763,7 @@ index 0000000..d6b23b0
 +}
 diff --git a/mitm/body_test.go b/mitm/body_test.go
 new file mode 100644
-index 0000000..5f0dade
+index 000000000..5f0dade85
 --- /dev/null
 +++ b/mitm/body_test.go
 @@ -0,0 +1,219 @@
@@ -2014,7 +1988,7 @@ index 0000000..5f0dade
 +}
 diff --git a/mitm/constants.go b/mitm/constants.go
 new file mode 100644
-index 0000000..e3a9a46
+index 000000000..e3a9a46b0
 --- /dev/null
 +++ b/mitm/constants.go
 @@ -0,0 +1,11 @@
@@ -2031,7 +2005,7 @@ index 0000000..e3a9a46
 +})
 diff --git a/mitm/engine.go b/mitm/engine.go
 new file mode 100644
-index 0000000..0fc9b5d
+index 000000000..d18bea329
 --- /dev/null
 +++ b/mitm/engine.go
 @@ -0,0 +1,1497 @@
@@ -2059,6 +2033,7 @@ index 0000000..0fc9b5d
 +	"unicode/utf8"
 +
 +	"github.com/sagernet/sing-box/adapter"
++	"github.com/sagernet/sing-box/common/badhttp"
 +	"github.com/sagernet/sing-box/common/dialer"
 +	sTLS "github.com/sagernet/sing-box/common/tls"
 +	"github.com/sagernet/sing-box/option"
@@ -2070,7 +2045,6 @@ index 0000000..0fc9b5d
 +	M "github.com/sagernet/sing/common/metadata"
 +	N "github.com/sagernet/sing/common/network"
 +	"github.com/sagernet/sing/common/ntp"
-+	sHTTP "github.com/sagernet/sing/protocol/http"
 +	"github.com/sagernet/sing/service"
 +	"github.com/sagernet/sing/service/filemanager"
 +
@@ -2346,7 +2320,7 @@ index 0000000..0fc9b5d
 +
 +func (e *Engine) handleHTTP1(ctx context.Context, this N.Dialer, conn net.Conn, reader *bufio.Reader, tlsConfig *tls.Config, metadata adapter.InboundContext) error {
 +	options := metadata.MITM
-+	request, err := sHTTP.ReadRequest(reader)
++	request, err := badhttp.ReadRequest(reader)
 +	if err != nil {
 +		if errors.Is(err, io.EOF) {
 +			return io.EOF
@@ -3533,7 +3507,7 @@ index 0000000..0fc9b5d
 +	w.statusCode = statusCode
 +}
 diff --git a/option/certificate.go b/option/certificate.go
-index 3831869..f934539 100644
+index 38318698e..f93453914 100644
 --- a/option/certificate.go
 +++ b/option/certificate.go
 @@ -14,6 +14,13 @@ type _CertificateOptions struct {
@@ -3552,7 +3526,7 @@ index 3831869..f934539 100644
  type CertificateOptions _CertificateOptions
 diff --git a/option/mitm.go b/option/mitm.go
 new file mode 100644
-index 0000000..7c15319
+index 000000000..7c153192b
 --- /dev/null
 +++ b/option/mitm.go
 @@ -0,0 +1,60 @@
@@ -3618,7 +3592,7 @@ index 0000000..7c15319
 +}
 diff --git a/option/mitm_surge_jq_test.go b/option/mitm_surge_jq_test.go
 new file mode 100644
-index 0000000..eb2cf5a
+index 000000000..eb2cf5ae3
 --- /dev/null
 +++ b/option/mitm_surge_jq_test.go
 @@ -0,0 +1,35 @@
@@ -3659,7 +3633,7 @@ index 0000000..eb2cf5a
 +}
 diff --git a/option/mitm_surge_urlrewrite.go b/option/mitm_surge_urlrewrite.go
 new file mode 100644
-index 0000000..49aa9b1
+index 000000000..49aa9b196
 --- /dev/null
 +++ b/option/mitm_surge_urlrewrite.go
 @@ -0,0 +1,555 @@
@@ -4219,7 +4193,7 @@ index 0000000..49aa9b1
 +	return fields, nil
 +}
 diff --git a/option/options.go b/option/options.go
-index b2116d3..ce4ccc7 100644
+index b2116d348..ce4ccc706 100644
 --- a/option/options.go
 +++ b/option/options.go
 @@ -28,6 +28,9 @@ type _Options struct {
@@ -4233,7 +4207,7 @@ index b2116d3..ce4ccc7 100644
  
  type Options _Options
 diff --git a/option/rule_action.go b/option/rule_action.go
-index ae05200..ab6d9d5 100644
+index ae0520043..ab6d9d5d3 100644
 --- a/option/rule_action.go
 +++ b/option/rule_action.go
 @@ -192,6 +192,8 @@ type RawRouteOptionsActionOptions struct {
@@ -4247,7 +4221,7 @@ index ae05200..ab6d9d5 100644
  type RouteOptionsActionOptions RawRouteOptionsActionOptions
 diff --git a/option/script.go b/option/script.go
 new file mode 100644
-index 0000000..d3d2e6f
+index 000000000..d3d2e6f47
 --- /dev/null
 +++ b/option/script.go
 @@ -0,0 +1,155 @@
@@ -4408,7 +4382,7 @@ index 0000000..d3d2e6f
 +}
 diff --git a/option/script_test.go b/option/script_test.go
 new file mode 100644
-index 0000000..6291889
+index 000000000..62918898d
 --- /dev/null
 +++ b/option/script_test.go
 @@ -0,0 +1,41 @@
@@ -4454,14 +4428,14 @@ index 0000000..6291889
 +	}
 +}
 diff --git a/release/DEFAULT_BUILD_TAGS_OTHERS b/release/DEFAULT_BUILD_TAGS_OTHERS
-index fd06571..da5f915 100644
+index fd06571fd..da5f91530 100644
 --- a/release/DEFAULT_BUILD_TAGS_OTHERS
 +++ b/release/DEFAULT_BUILD_TAGS_OTHERS
 @@ -1 +1 @@
 -with_quic,with_dhcp,with_wireguard,with_utls,with_acme,with_clash_api,with_tailscale,with_ccm,with_ocm,with_cloudflared,with_usbip,with_openvpn,with_openconnect,badlinkname,tfogo_checklinkname0
 +with_quic,with_dhcp,with_wireguard,with_utls,with_acme,with_clash_api,with_script,with_tailscale,with_ccm,with_ocm,with_cloudflared,with_usbip,with_openvpn,with_openconnect,badlinkname,tfogo_checklinkname0
 diff --git a/route/conn.go b/route/conn.go
-index e6ddc30..4423f4a 100644
+index 5e8b0fb99..a8be8dc50 100644
 --- a/route/conn.go
 +++ b/route/conn.go
 @@ -2,6 +2,7 @@ package route
@@ -4537,7 +4511,7 @@ index e6ddc30..4423f4a 100644
  		remotePacketConn   net.PacketConn
 diff --git a/route/mitm_merge_test.go b/route/mitm_merge_test.go
 new file mode 100644
-index 0000000..7f09265
+index 000000000..7f09265d0
 --- /dev/null
 +++ b/route/mitm_merge_test.go
 @@ -0,0 +1,27 @@
@@ -4570,7 +4544,7 @@ index 0000000..7f09265
 +}
 diff --git a/route/mitm_quic_test.go b/route/mitm_quic_test.go
 new file mode 100644
-index 0000000..1e5b3a7
+index 000000000..1e5b3a757
 --- /dev/null
 +++ b/route/mitm_quic_test.go
 @@ -0,0 +1,95 @@
@@ -4670,10 +4644,10 @@ index 0000000..1e5b3a7
 +	}
 +}
 diff --git a/route/route.go b/route/route.go
-index fb36ac9..4165aeb 100644
+index 150ff53fd..849735356 100644
 --- a/route/route.go
 +++ b/route/route.go
-@@ -13,6 +13,7 @@ import (
+@@ -15,6 +15,7 @@ import (
  	"github.com/sagernet/sing-box/common/sniff"
  	C "github.com/sagernet/sing-box/constant"
  	"github.com/sagernet/sing-box/log"
@@ -4681,7 +4655,7 @@ index fb36ac9..4165aeb 100644
  	R "github.com/sagernet/sing-box/route/rule"
  	"github.com/sagernet/sing-mux"
  	"github.com/sagernet/sing-tun"
-@@ -665,6 +666,9 @@ match:
+@@ -692,6 +693,9 @@ match:
  				metadata.TLSSpoof = routeOptions.TLSSpoof
  				metadata.TLSSpoofMethod = routeOptions.TLSSpoofMethod
  			}
@@ -4691,7 +4665,7 @@ index fb36ac9..4165aeb 100644
  		}
  		switch action := currentRule.Action().(type) {
  		case *R.RuleActionSniff:
-@@ -705,6 +709,30 @@ match:
+@@ -732,6 +736,30 @@ match:
  	return
  }
  
@@ -4723,7 +4697,7 @@ index fb36ac9..4165aeb 100644
  	ctx context.Context, metadata *adapter.InboundContext, action *R.RuleActionSniff,
  	inputConn net.Conn, inputPacketConn N.PacketConn, inputBuffers []*buf.Buffer, inputPacketBuffers []*N.PacketBuffer,
 diff --git a/route/rule/rule_action.go b/route/rule/rule_action.go
-index cb65611..a66fb44 100644
+index cb6561181..a66fb44da 100644
 --- a/route/rule/rule_action.go
 +++ b/route/rule/rule_action.go
 @@ -42,6 +42,7 @@ func newRuleActionRouteOptions(options option.RawRouteOptionsActionOptions) (Rul
@@ -4763,7 +4737,7 @@ index cb65611..a66fb44 100644
  
 diff --git a/script/compile.go b/script/compile.go
 new file mode 100644
-index 0000000..1662dd7
+index 000000000..1662dd7ef
 --- /dev/null
 +++ b/script/compile.go
 @@ -0,0 +1,36 @@
@@ -4805,7 +4779,7 @@ index 0000000..1662dd7
 +}
 diff --git a/script/jsc/array.go b/script/jsc/array.go
 new file mode 100644
-index 0000000..a113e02
+index 000000000..a113e02ce
 --- /dev/null
 +++ b/script/jsc/array.go
 @@ -0,0 +1,23 @@
@@ -4834,7 +4808,7 @@ index 0000000..a113e02
 +func runtimeGetUint8Array(r *goja.Runtime) *goja.Object
 diff --git a/script/jsc/array_test.go b/script/jsc/array_test.go
 new file mode 100644
-index 0000000..77f43dc
+index 000000000..77f43dc5a
 --- /dev/null
 +++ b/script/jsc/array_test.go
 @@ -0,0 +1,18 @@
@@ -4858,7 +4832,7 @@ index 0000000..77f43dc
 +}
 diff --git a/script/jsc/assert.go b/script/jsc/assert.go
 new file mode 100644
-index 0000000..0b7fe3b
+index 000000000..0b7fe3b63
 --- /dev/null
 +++ b/script/jsc/assert.go
 @@ -0,0 +1,124 @@
@@ -4988,7 +4962,7 @@ index 0000000..0b7fe3b
 +}
 diff --git a/script/jsc/class.go b/script/jsc/class.go
 new file mode 100644
-index 0000000..cb94951
+index 000000000..cb949512f
 --- /dev/null
 +++ b/script/jsc/class.go
 @@ -0,0 +1,192 @@
@@ -5186,7 +5160,7 @@ index 0000000..cb94951
 +}
 diff --git a/script/jsc/headers.go b/script/jsc/headers.go
 new file mode 100644
-index 0000000..26dd681
+index 000000000..26dd681ac
 --- /dev/null
 +++ b/script/jsc/headers.go
 @@ -0,0 +1,77 @@
@@ -5269,7 +5243,7 @@ index 0000000..26dd681
 +}
 diff --git a/script/jsc/headers_test.go b/script/jsc/headers_test.go
 new file mode 100644
-index 0000000..ecbae23
+index 000000000..ecbae23b7
 --- /dev/null
 +++ b/script/jsc/headers_test.go
 @@ -0,0 +1,31 @@
@@ -5306,7 +5280,7 @@ index 0000000..ecbae23
 +}
 diff --git a/script/jsc/iterator.go b/script/jsc/iterator.go
 new file mode 100644
-index 0000000..deb6676
+index 000000000..deb66764a
 --- /dev/null
 +++ b/script/jsc/iterator.go
 @@ -0,0 +1,36 @@
@@ -5348,7 +5322,7 @@ index 0000000..deb6676
 +}
 diff --git a/script/jsc/time.go b/script/jsc/time.go
 new file mode 100644
-index 0000000..7879f84
+index 000000000..7879f84c0
 --- /dev/null
 +++ b/script/jsc/time.go
 @@ -0,0 +1,18 @@
@@ -5372,7 +5346,7 @@ index 0000000..7879f84
 +func runtimeGetDatePrototype(r *goja.Runtime) *goja.Object
 diff --git a/script/jsc/time_test.go b/script/jsc/time_test.go
 new file mode 100644
-index 0000000..5ef86e7
+index 000000000..5ef86e75c
 --- /dev/null
 +++ b/script/jsc/time_test.go
 @@ -0,0 +1,20 @@
@@ -5398,7 +5372,7 @@ index 0000000..5ef86e7
 +}
 diff --git a/script/jstest/assert.js b/script/jstest/assert.js
 new file mode 100644
-index 0000000..b00076d
+index 000000000..b00076dd4
 --- /dev/null
 +++ b/script/jstest/assert.js
 @@ -0,0 +1,83 @@
@@ -5488,7 +5462,7 @@ index 0000000..b00076d
 \ No newline at end of file
 diff --git a/script/jstest/test.go b/script/jstest/test.go
 new file mode 100644
-index 0000000..e287f8c
+index 000000000..e287f8c2e
 --- /dev/null
 +++ b/script/jstest/test.go
 @@ -0,0 +1,21 @@
@@ -5515,7 +5489,7 @@ index 0000000..e287f8c
 +}
 diff --git a/script/manager.go b/script/manager.go
 new file mode 100644
-index 0000000..346b8ad
+index 000000000..346b8ad03
 --- /dev/null
 +++ b/script/manager.go
 @@ -0,0 +1,125 @@
@@ -5646,7 +5620,7 @@ index 0000000..346b8ad
 +}
 diff --git a/script/manager_stub.go b/script/manager_stub.go
 new file mode 100644
-index 0000000..eae7ed6
+index 000000000..eae7ed669
 --- /dev/null
 +++ b/script/manager_stub.go
 @@ -0,0 +1,43 @@
@@ -5695,7 +5669,7 @@ index 0000000..eae7ed6
 +}
 diff --git a/script/modules/boxctx/context.go b/script/modules/boxctx/context.go
 new file mode 100644
-index 0000000..48a55c6
+index 000000000..48a55c6fb
 --- /dev/null
 +++ b/script/modules/boxctx/context.go
 @@ -0,0 +1,52 @@
@@ -5753,7 +5727,7 @@ index 0000000..48a55c6
 +}
 diff --git a/script/modules/boxctx/module.go b/script/modules/boxctx/module.go
 new file mode 100644
-index 0000000..a18fe84
+index 000000000..a18fe8440
 --- /dev/null
 +++ b/script/modules/boxctx/module.go
 @@ -0,0 +1,35 @@
@@ -5794,7 +5768,7 @@ index 0000000..a18fe84
 +}
 diff --git a/script/modules/console/console.go b/script/modules/console/console.go
 new file mode 100644
-index 0000000..4fcfec1
+index 000000000..4fcfec1f1
 --- /dev/null
 +++ b/script/modules/console/console.go
 @@ -0,0 +1,281 @@
@@ -6081,7 +6055,7 @@ index 0000000..4fcfec1
 +}
 diff --git a/script/modules/console/context.go b/script/modules/console/context.go
 new file mode 100644
-index 0000000..cfe522a
+index 000000000..cfe522a57
 --- /dev/null
 +++ b/script/modules/console/context.go
 @@ -0,0 +1,3 @@
@@ -6090,7 +6064,7 @@ index 0000000..cfe522a
 +type Context struct{}
 diff --git a/script/modules/console/module.go b/script/modules/console/module.go
 new file mode 100644
-index 0000000..4e7cf0e
+index 000000000..4e7cf0ee3
 --- /dev/null
 +++ b/script/modules/console/module.go
 @@ -0,0 +1,34 @@
@@ -6130,7 +6104,7 @@ index 0000000..4e7cf0e
 +}
 diff --git a/script/modules/eventloop/eventloop.go b/script/modules/eventloop/eventloop.go
 new file mode 100644
-index 0000000..33766bf
+index 000000000..33766bf9d
 --- /dev/null
 +++ b/script/modules/eventloop/eventloop.go
 @@ -0,0 +1,489 @@
@@ -6625,7 +6599,7 @@ index 0000000..33766bf
 +}
 diff --git a/script/modules/require/module.go b/script/modules/require/module.go
 new file mode 100644
-index 0000000..62ea3bf
+index 000000000..62ea3bfec
 --- /dev/null
 +++ b/script/modules/require/module.go
 @@ -0,0 +1,231 @@
@@ -6862,7 +6836,7 @@ index 0000000..62ea3bf
 +}
 diff --git a/script/modules/require/resolve.go b/script/modules/require/resolve.go
 new file mode 100644
-index 0000000..e52fc2f
+index 000000000..e52fc2fff
 --- /dev/null
 +++ b/script/modules/require/resolve.go
 @@ -0,0 +1,277 @@
@@ -7145,7 +7119,7 @@ index 0000000..e52fc2f
 +}
 diff --git a/script/modules/sgnotification/module.go b/script/modules/sgnotification/module.go
 new file mode 100644
-index 0000000..a609e5a
+index 000000000..a609e5a61
 --- /dev/null
 +++ b/script/modules/sgnotification/module.go
 @@ -0,0 +1,111 @@
@@ -7262,7 +7236,7 @@ index 0000000..a609e5a
 +}
 diff --git a/script/modules/surge/environment.go b/script/modules/surge/environment.go
 new file mode 100644
-index 0000000..590469c
+index 000000000..590469c60
 --- /dev/null
 +++ b/script/modules/surge/environment.go
 @@ -0,0 +1,65 @@
@@ -7333,7 +7307,7 @@ index 0000000..590469c
 +}
 diff --git a/script/modules/surge/http.go b/script/modules/surge/http.go
 new file mode 100644
-index 0000000..6dc58e5
+index 000000000..6dc58e53b
 --- /dev/null
 +++ b/script/modules/surge/http.go
 @@ -0,0 +1,234 @@
@@ -7573,7 +7547,7 @@ index 0000000..6dc58e5
 +}
 diff --git a/script/modules/surge/module.go b/script/modules/surge/module.go
 new file mode 100644
-index 0000000..2dc60fb
+index 000000000..2dc60fb3d
 --- /dev/null
 +++ b/script/modules/surge/module.go
 @@ -0,0 +1,109 @@
@@ -7688,7 +7662,7 @@ index 0000000..2dc60fb
 +}
 diff --git a/script/modules/surge/notification.go b/script/modules/surge/notification.go
 new file mode 100644
-index 0000000..8c7714a
+index 000000000..8c7714a31
 --- /dev/null
 +++ b/script/modules/surge/notification.go
 @@ -0,0 +1,120 @@
@@ -7814,7 +7788,7 @@ index 0000000..8c7714a
 +}
 diff --git a/script/modules/surge/persistent_store.go b/script/modules/surge/persistent_store.go
 new file mode 100644
-index 0000000..d00a83a
+index 000000000..d00a83a5d
 --- /dev/null
 +++ b/script/modules/surge/persistent_store.go
 @@ -0,0 +1,89 @@
@@ -7909,7 +7883,7 @@ index 0000000..d00a83a
 +}
 diff --git a/script/modules/surge/script.go b/script/modules/surge/script.go
 new file mode 100644
-index 0000000..ef2dae4
+index 000000000..ef2dae40f
 --- /dev/null
 +++ b/script/modules/surge/script.go
 @@ -0,0 +1,44 @@
@@ -7959,7 +7933,7 @@ index 0000000..ef2dae4
 +}
 diff --git a/script/modules/surge/utils.go b/script/modules/surge/utils.go
 new file mode 100644
-index 0000000..9320ab1
+index 000000000..9320ab1cc
 --- /dev/null
 +++ b/script/modules/surge/utils.go
 @@ -0,0 +1,50 @@
@@ -8015,7 +7989,7 @@ index 0000000..9320ab1
 +}
 diff --git a/script/modules/url/escape.go b/script/modules/url/escape.go
 new file mode 100644
-index 0000000..93c8ab1
+index 000000000..93c8ab1b3
 --- /dev/null
 +++ b/script/modules/url/escape.go
 @@ -0,0 +1,55 @@
@@ -8076,7 +8050,7 @@ index 0000000..93c8ab1
 +}
 diff --git a/script/modules/url/module.go b/script/modules/url/module.go
 new file mode 100644
-index 0000000..11b4b6c
+index 000000000..11b4b6c4c
 --- /dev/null
 +++ b/script/modules/url/module.go
 @@ -0,0 +1,41 @@
@@ -8123,7 +8097,7 @@ index 0000000..11b4b6c
 +}
 diff --git a/script/modules/url/module_test.go b/script/modules/url/module_test.go
 new file mode 100644
-index 0000000..2b38a40
+index 000000000..2b38a40d7
 --- /dev/null
 +++ b/script/modules/url/module_test.go
 @@ -0,0 +1,37 @@
@@ -8166,7 +8140,7 @@ index 0000000..2b38a40
 +}
 diff --git a/script/modules/url/testdata/url_search_params_test.js b/script/modules/url/testdata/url_search_params_test.js
 new file mode 100644
-index 0000000..4c4897c
+index 000000000..4c4897c34
 --- /dev/null
 +++ b/script/modules/url/testdata/url_search_params_test.js
 @@ -0,0 +1,385 @@
@@ -8557,7 +8531,7 @@ index 0000000..4c4897c
 +}
 diff --git a/script/modules/url/testdata/url_test.js b/script/modules/url/testdata/url_test.js
 new file mode 100644
-index 0000000..a6ff43b
+index 000000000..a6ff43be1
 --- /dev/null
 +++ b/script/modules/url/testdata/url_test.js
 @@ -0,0 +1,229 @@
@@ -8792,7 +8766,7 @@ index 0000000..a6ff43b
 +}
 diff --git a/script/modules/url/url.go b/script/modules/url/url.go
 new file mode 100644
-index 0000000..7b442de
+index 000000000..7b442ded7
 --- /dev/null
 +++ b/script/modules/url/url.go
 @@ -0,0 +1,315 @@
@@ -9113,7 +9087,7 @@ index 0000000..7b442de
 +}
 diff --git a/script/modules/url/url_search_params.go b/script/modules/url/url_search_params.go
 new file mode 100644
-index 0000000..945f076
+index 000000000..945f076f2
 --- /dev/null
 +++ b/script/modules/url/url_search_params.go
 @@ -0,0 +1,244 @@
@@ -9363,7 +9337,7 @@ index 0000000..945f076
 +}
 diff --git a/script/runtime.go b/script/runtime.go
 new file mode 100644
-index 0000000..6e53c92
+index 000000000..6e53c92fa
 --- /dev/null
 +++ b/script/runtime.go
 @@ -0,0 +1,52 @@
@@ -9421,7 +9395,7 @@ index 0000000..6e53c92
 +}
 diff --git a/script/script.go b/script/script.go
 new file mode 100644
-index 0000000..7211200
+index 000000000..721120046
 --- /dev/null
 +++ b/script/script.go
 @@ -0,0 +1,22 @@
@@ -9449,7 +9423,7 @@ index 0000000..7211200
 +}
 diff --git a/script/script_surge.go b/script/script_surge.go
 new file mode 100644
-index 0000000..4a1a6e1
+index 000000000..4a1a6e10a
 --- /dev/null
 +++ b/script/script_surge.go
 @@ -0,0 +1,441 @@
@@ -9896,7 +9870,7 @@ index 0000000..4a1a6e1
 +}
 diff --git a/script/script_surge_test.go b/script/script_surge_test.go
 new file mode 100644
-index 0000000..1fa4a72
+index 000000000..1fa4a729f
 --- /dev/null
 +++ b/script/script_surge_test.go
 @@ -0,0 +1,313 @@
@@ -10215,7 +10189,7 @@ index 0000000..1fa4a72
 +}
 diff --git a/script/source.go b/script/source.go
 new file mode 100644
-index 0000000..1f5d58c
+index 000000000..1f5d58c97
 --- /dev/null
 +++ b/script/source.go
 @@ -0,0 +1,33 @@
@@ -10254,7 +10228,7 @@ index 0000000..1f5d58c
 +}
 diff --git a/script/source_local.go b/script/source_local.go
 new file mode 100644
-index 0000000..d6e7b49
+index 000000000..d6e7b4978
 --- /dev/null
 +++ b/script/source_local.go
 @@ -0,0 +1,98 @@
@@ -10358,7 +10332,7 @@ index 0000000..d6e7b49
 +}
 diff --git a/script/source_remote.go b/script/source_remote.go
 new file mode 100644
-index 0000000..29233c7
+index 000000000..29233c744
 --- /dev/null
 +++ b/script/source_remote.go
 @@ -0,0 +1,299 @@
@@ -10661,33 +10635,3 @@ index 0000000..29233c7
 +	s.cancel()
 +	return nil
 +}
-diff --git a/service/oomkiller/policy.go b/service/oomkiller/policy.go
-index 31c4b79..ca1ee3c 100644
---- a/service/oomkiller/policy.go
-+++ b/service/oomkiller/policy.go
-@@ -11,7 +11,7 @@ import (
- )
- 
- const (
--	DefaultAppleNetworkExtensionMemoryLimit = 50 * 1024 * 1024
-+	DefaultAppleNetworkExtensionMemoryLimit = 42 * 1024 * 1024
- 	DefaultAppleNetworkExtensionGCPercent   = 50
- )
- 
-diff --git a/service/powerreport/promote.go b/service/powerreport/promote.go
-index e410396..a21d079 100644
---- a/service/powerreport/promote.go
-+++ b/service/powerreport/promote.go
-@@ -10,6 +10,12 @@ func DiscardDraft(basePath string) {
- 	os.RemoveAll(filepath.Join(basePath, DraftDirectoryName))
- }
- 
-+// PromoteDraft finalizes a leftover draft from a previous run that did not
-+// shut down cleanly, so its data is kept as a report.
-+func PromoteDraft(basePath string) {
-+	finalizeDraft(filepath.Join(basePath, DraftDirectoryName))
-+}
-+
- func finalizeDraft(draftPath string) {
- 	reportsPath := filepath.Join(filepath.Dir(draftPath), ReportsDirectoryName)
- 	info, err := os.Stat(draftPath)

@@ -2,8 +2,8 @@
 
 ## 1. 工程组成
 
-- Apple 客户端：官方 `sing-box-for-apple` 提交 `ae5818e`。
-- sing-box 内核：基于 `v1.15.0-alpha.6` 的 MITM 移植版本；当前工作区包含完整的 Surge MITM 修复层。
+- Apple 客户端：官方 `sing-box-for-apple` 提交 `64470f9`（1.15.0-alpha.7）。
+- sing-box 内核：基于 `v1.15.0-alpha.7` 的 MITM 移植版本；当前工作区包含完整的 Surge MITM 修复层。
 - App 实际链接根目录的 `Libbox.xcframework`；该框架由上述 MITM 内核生成。
 - 附件中的 `.p12` 是 Apple 应用签名证书，不是 MITM 根 CA。两者不能混用。
 

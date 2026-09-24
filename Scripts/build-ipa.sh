@@ -15,7 +15,7 @@ project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 profile_file="${PROFILE_PATH:-$project_root/.signing/profile.mobileprovision}"
 identity="${SIGNING_IDENTITY:?Set SIGNING_IDENTITY to your iPhone Distribution identity, e.g. 'iPhone Distribution: Name (TEAMID)'}"
 derived_data="$project_root/build/DerivedData-ipa"
-output_ipa="${OUTPUT_IPA:-$project_root/sing-box-1.15.0-alpha.6-mitm.ipa}"
+output_ipa="${OUTPUT_IPA:-$project_root/sing-box-1.15.0-alpha.7-mitm.ipa}"
 app_marketing_version="${APP_MARKETING_VERSION:-1.15.0}"
 app_build_version="${APP_BUILD_VERSION:-11}"
 
